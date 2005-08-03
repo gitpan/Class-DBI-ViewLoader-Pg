@@ -1,0 +1,27 @@
+NAME
+    Class::DBI::ViewLoader::Pg - Class::DBI::Viewloader implementation for
+    Postgresql.
+
+SYNOPSIS
+    See Class::DBI::ViewLoader
+
+DESCRIPTION
+    This is the postgresql driver for Class::DBI::ViewLoader,
+
+METHODS
+  base_class
+    Causes generated classes to inherit from Class::DBI::Pg.
+
+  get_views
+    See Class::DBI::ViewLoader for a description of this method.
+
+  get_view_cols
+    See Class::DBI::ViewLoader for a description of this method.
+
+SEE ALSO
+    Class::DBI::ViewLoader, Class::DBI::Loader, Class::DBI,
+    <http://www.postgresql.org/>
+
+AUTHOR
+    Matt Lawrence <mattlaw@cpan.org>
+
