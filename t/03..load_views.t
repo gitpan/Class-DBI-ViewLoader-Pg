@@ -1,4 +1,4 @@
-
+#!/usr/bin/env perl 
 use strict;
 use warnings;
 
@@ -6,7 +6,7 @@ use Test::More tests => 16;
 
 use Module::Build;
 my $builder = Module::Build->current;
-my($db_name, $user, $pass) = map {$builder->args($_)} qw( db_name user pass );
+my($db_name, $db_host, $user, $pass) = map {$builder->args($_)} qw( db_name db_host user pass );
 
 BEGIN {
     # Class::DBI::ViewLoader::Pg should get loaded by Module::Pluggable
@@ -14,7 +14,7 @@ BEGIN {
 }
 
 my $loader = new Class::DBI::ViewLoader (
-	dsn => "dbi:Pg:dbname=$db_name",
+	dsn => "dbi:Pg:dbname=$db_name;host=$db_host",
 	username => $user,
 	password => $pass,
 	options => { RaiseError => 1, AutoCommit => 0 },

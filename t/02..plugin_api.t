@@ -1,34 +1,29 @@
 
-# Test that the api defined by Class::DBI::ViewLoader is implemented by this
-# class
+# API tests for Class::DBI::ViewLoader 0.01
+
+# Driver writers may want to copy this file into their distribution
 
 use strict;
 use warnings;
 
-use Test::More;
+use Test::More tests => 4;
 
 use lib qw( t/lib );
 
-our($class, @api_methods);
+our $class;
 
 BEGIN {
+    # Change this to the name of your driver
     my $plugin_name = 'Pg';
-    our $class = "Class::DBI::ViewLoader::$plugin_name";
-    our @api_methods = qw(
-	    base_class
-	    get_views
-	    get_view_cols
-	);
 
-    plan tests => @api_methods + 2;
+    $class = "Class::DBI::ViewLoader::$plugin_name";
 
+    use_ok('Class::DBI::ViewLoader');
     use_ok($class);
 }
 
-ok($class->isa('Class::DBI::ViewLoader'));
-for my $method (@api_methods) {
-    can_ok($class, $method);
-}
+ok($class->isa('Class::DBI::ViewLoader'), "$class isa Class::DBI::ViewLoader");
+can_ok($class, @Class::DBI::ViewLoader::driver_methods);
 
 __END__
 

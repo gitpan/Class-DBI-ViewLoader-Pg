@@ -10,14 +10,14 @@ use Test::More tests => 6;
 
 use Module::Build;
 my $builder = Module::Build->current;
-my($db_name, $user, $pass) = map {$builder->args($_)} qw( db_name user pass );
+my($db_name, $db_host, $user, $pass, $init_db) = map {$builder->args($_)} qw( db_name db_host user pass init_db);
 
 my $dbh = DBI->connect(
-	"dbi:Pg:",
+	"dbi:Pg:host=$db_host;dbname=$init_db",
 	$user,
 	$pass,
 	{ AutoCommit => 1, RaiseError => 0, PrintError => 0 }
-    );
+    ) or die $DBI::errstr;
 
 my $create = "create database $db_name";
 my $drop = "drop database $db_name";
@@ -35,7 +35,7 @@ pass("set up $db_name");
 $dbh->disconnect;
 
 ok($dbh = DBI->connect(
-	"dbi:Pg:dbname=$db_name",
+	"dbi:Pg:dbname=$db_name;host=$db_host;",
 	$user,
 	$pass,
 	{ AutoCommit => 0, RaiseError => 1 }

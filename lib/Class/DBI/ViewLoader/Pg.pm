@@ -3,7 +3,7 @@ package Class::DBI::ViewLoader::Pg;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 NAME
 
@@ -111,5 +111,12 @@ L<Class::DBI::ViewLoader>, L<Class::DBI::Loader>, L<Class::DBI>, L<http://www.po
 =head1 AUTHOR
 
 Matt Lawrence E<lt>mattlaw@cpan.orgE<gt>
+
+=head1 COPYRIGHT
+
+Copyright 2005 Matt Lawrence, All Rights Reserved.
+
+This program is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.
 
 =cut
