@@ -1,9 +1,14 @@
 Changes document for Class::DBI::ViewLoader::Pg
 
-0.02 - this version
+0.03 - Fri, 2 Sep 2005
+	- Added more useful documentation
+	- Fixed bug with cached statement handles
+
+0.02 - Fri, 12 Aug 2005
 	- Updated Build.PL to cope with non-local test databases and
 	  non-existant default databases
 
 	- Updated api plugin test script to match Class::DBI::ViewLoader 0.02
 
-0.01 - initial version
+0.01 - Wed, 03 Aug 2005
+	- initial version

@@ -3,20 +3,30 @@ NAME
     Postgresql.
 
 SYNOPSIS
-    See Class::DBI::ViewLoader
+        use Class::DBI::ViewLoader;
+
+        $loader = Class::DBI::ViewLoader dsn => 'dbi:Pg:dbname=mydb';
+
+        # load views from mydb
+        @classes = $loader->load_views
 
 DESCRIPTION
     This is the postgresql driver for Class::DBI::ViewLoader,
 
 METHODS
   base_class
-    Causes generated classes to inherit from Class::DBI::Pg.
+    Returns 'Class::DBI::Pg'. This class will be used as the main base class
+    for all classes generated using this driver.
 
   get_views
-    See Class::DBI::ViewLoader for a description of this method.
+        @views = $obj->get_views
+
+    Returns a list of the names of the views in the current database.
 
   get_view_cols
-    See Class::DBI::ViewLoader for a description of this method.
+        @cols = $obj->get_view_cols($view)
+
+    Returns the columns contained in the given view.
 
 SEE ALSO
     Class::DBI::ViewLoader, Class::DBI::Loader, Class::DBI,

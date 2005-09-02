@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 16;
+use Test::More tests => 17;
 
 use Module::Build;
 my $builder = Module::Build->current;
@@ -13,8 +13,9 @@ BEGIN {
     use_ok('Class::DBI::ViewLoader');
 }
 
+my $dsn = "dbi:Pg:dbname=$db_name;host=$db_host";
 my $loader = new Class::DBI::ViewLoader (
-	dsn => "dbi:Pg:dbname=$db_name;host=$db_host",
+	dsn => $dsn,
 	username => $user,
 	password => $pass,
 	options => { RaiseError => 1, AutoCommit => 0 },
@@ -46,7 +47,7 @@ for my $expected (@expected) {
     ok($lookup{$expected}, $expected);
 }
 
-# Make the include rule the exclude rule and remove the exclude rule.
+# remove the exclude rule.
 $loader->set_exclude;
 
 my %classes = map {$_ => 1} @classes = $loader->load_views();
@@ -59,6 +60,13 @@ for my $class (@expected) {
 is(@matches, 2, '2 matches for Pierce Brosnan');
 is($matches[0]->actor, $matches[1]->actor, 'identical actor field');
 is($matches[0]->role, $matches[1]->role, 'identical role field');
+
+# this should cause the DBI handle to be cleared
+$loader->set_dsn($dsn);
+
+my($view) = $loader->get_views;
+eval { $loader->get_view_cols($view) };
+ok(!$@, "get_view_cols after DBI reconnect");
 
 __END__
 
