@@ -1,5 +1,8 @@
 Changes document for Class::DBI::ViewLoader::Pg
 
+0.04 - Fri, 28 Oct 2005
+	- Added Test::Pod and Test::Pod::Coverage tests
+
 0.03 - Fri, 2 Sep 2005
 	- Added more useful documentation
 	- Fixed bug with cached statement handles

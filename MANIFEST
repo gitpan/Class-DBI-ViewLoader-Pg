@@ -8,5 +8,6 @@ README
 t/01..setup.t
 t/02..plugin_api.t
 t/03..load_views.t
+t/04..pod.t
 t/99..shutdown.t
 t/data/create_tables.pgsql
