@@ -1,29 +1,38 @@
+use strict;
+use warnings;
 
+our @modules;
 BEGIN {
-    our @modules = qw(
+    @modules = qw(
         Class::DBI::ViewLoader::Pg
     );
 }
 
 use File::Spec::Functions qw( catfile );
 
-use Test::More tests => our @modules * 2;
+use Test::More tests => @modules * 2;
 
 SKIP: {
-    eval 'use Test::Pod';
+    eval {
+        require Test::Pod;
+        import Test::Pod;
+    };
 
     skip "Test::Pod not installed", scalar @modules if $@;
 
     for my $module (@modules) {
         my @path = ('lib', split('::', $module));
-        my $file = pop(@path) . '.pm';
+        $path[-1] .= '.pm';
         
-        pod_file_ok(catfile(@path, $file), "$module pod ok");
+        pod_file_ok(catfile(@path), "$module pod ok");
     }
 }
 
 SKIP: {
-    eval 'use Test::Pod::Coverage';
+    eval {
+        require Test::Pod::Coverage;
+        import Test::Pod::Coverage;
+    };
 
     skip "Test::Pod::Coverage not installed", scalar @modules if $@;
 

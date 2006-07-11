@@ -3,7 +3,7 @@ package Class::DBI::ViewLoader::Pg;
 use strict;
 use warnings;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 =head1 NAME
 
@@ -109,6 +109,7 @@ sub _get_cols_sth {
 sub _clear_dbi_handle {
     my $self = shift;
 
+    # Should be no need to explicitly finish this..
     delete $self->{__col_sth};
 
     $self->SUPER::_clear_dbi_handle(@_);
